@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Home - Dhonan</title></head>
+<body>
+<h1>Selamat Datang di Dashboard Dhonan</h1>
+<a href="/form">Tambah Data Mahasiswa</a>
+<table border="1">
+    <tr><th>Nama</th><th>NIM</th></tr>
+    <tr th:each="m : ${mahasiswa}">
+        <td th:text="${m.nama}"></td>
+        <td th:text="${m.nim}"></td>
+    </tr>
+</table>
+</body>
+</html>
