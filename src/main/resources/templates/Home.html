@@ -1,15 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Home - Dhonan</title></head>
-<body>
-<h1>Selamat Datang di Dashboard Dhonan</h1>
-<a href="/form">Tambah Data Mahasiswa</a>
-<table border="1">
-    <tr><th>Nama</th><th>NIM</th></tr>
-    <tr th:each="m : ${mahasiswa}">
-        <td th:text="${m.nama}"></td>
-        <td th:text="${m.nim}"></td>
-    </tr>
-</table>
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | IT UMY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar { background: #2c3e50 !important; }
+        .table thead { background: #f8f9fa; }
+    </style>
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">IT UMY - Deploy</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">Halo, <span class="text-primary" th:text="${namaUser}">User</span>!</h2>
+            <p class="text-muted">Selamat datang di sistem manajemen data mahasiswa.</p>
+        </div>
+        <a href="/form" class="btn btn-success px-4">+ Tambah Data</a>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th class="ps-4">Nama Lengkap</th>
+                    <th>NIM</th>
+                    <th class="text-center">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="m : ${mahasiswa}">
+                    <td class="ps-4 fw-medium" th:text="${m.nama}"></td>
+                    <td th:text="${m.nim}"></td>
+                    <td class="text-center"><span class="badge bg-info text-dark">Mahasiswa</span></td>
+                </tr>
+                <tr th:if="${mahasiswa.empty}">
+                    <td colspan="3" class="text-center py-4 text-muted">Belum ada data mahasiswa.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="mt-5 text-center text-muted small">
+        <p>&copy; 2026 Dhonan - 20230140071. Tugas Pertemuan 6.</p>
+    </footer>
+</div>
 </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Input Data | IT UMY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm p-4">
+                <h4 class="fw-bold mb-4">Tambah Data Mahasiswa</h4>
+                <form th:action="@{/save}" th:object="${user}" method="post">
+                    <div class="mb-3">
+                        <label class="form-label text-muted">Nama Lengkap</label>
+                        <input type="text" th:field="*{nama}" class="form-control" placeholder="Contoh: Budi Santoso" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label text-muted">Nomor Induk Mahasiswa (NIM)</label>
+                        <input type="text" th:field="*{nim}" class="form-control" placeholder="Contoh: 20230140001" required>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary px-4">Simpan Data</button>
+                        <a href="/home" class="btn btn-outline-secondary px-4">Kembali</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

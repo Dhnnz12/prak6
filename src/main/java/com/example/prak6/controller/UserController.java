@@ -1,9 +1,12 @@
 package com.example.prak6.controller;
 
+
+
 import com.example.prak6.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +21,22 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
-        // Ganti password dengan NIM Anda: 20230140071
+    public String login(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
+        // Password menggunakan NIM Anda
         if ("admin".equals(username) && "20230140071".equals(password)) {
+            // Mengirim nama user ke redirect agar bisa dibaca di Home
+            redirectAttributes.addFlashAttribute("currentUser", "Dhonan");
             return "redirect:/home";
         }
-        model.addAttribute("error", "Username atau Password Salah!");
-        return "login";
+        redirectAttributes.addFlashAttribute("error", "Username atau Password Salah!");
+        return "redirect:/";
     }
 
     @GetMapping("/home")
-    public String homePage(Model model) {
+    public String homePage(Model model, @ModelAttribute("currentUser") String currentUser) {
         model.addAttribute("mahasiswa", listMahasiswa);
+        // Jika flash attribute kosong, beri nama default
+        model.addAttribute("namaUser", (currentUser == null || currentUser.isEmpty()) ? "Admin" : currentUser);
         return "home";
     }
 
